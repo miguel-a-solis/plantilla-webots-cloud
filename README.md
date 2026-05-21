@@ -1,13 +1,13 @@
-# Template for webots.cloud simulations
-This repository can be used as a template to deploy a simulation on [webots.cloud](https://webots.cloud).
+# Plantilla para Webots Cloud
+Este repositorio se puede usar como plantilla para desplegar una simulación en [webots.cloud](https://webots.cloud). Este repositorio es un fork de [https://github.com/cyberbotics/webots-cloud-simulation-template](https://github.com/cyberbotics/webots-cloud-simulation-template).
 
-## Structure
-The template contains a generic project featuring the e-puck robot.
-The world `e-puck.wbt` is located in the `worlds` folder.
-The controller `e-puck.py` is located in the `controllers/e-puck` folder.
-The robot window `simple_e-puck` is located in the `plugins/robot_windows` folder.
+## Estructura
+La plantilla contiene un proyecto genérico con el robot e-puck.
+El mundo `e-puck.wbt` está ubicado en la carpeta `worlds`.
+El controlador `e-puck.py` está ubicado en la carpeta `controllers/e-puck`.
+La ventana del robot `simple_e-puck` está ubicada en la carpeta `plugins/robot_windows`.
 
-The defined `Dockerfile` is placed at the root of the project and implements the four lines of `Dockerfile.default`, which would have been used by [webots.cloud](https://webots.cloud) if no Dockerfile was defined.
+Se necesita un archivo Docker. En caso de no definir algún Dockerfile, el archivo `Dockerfile.default` ubicado en la raíz del proyecto, contiene cuatro líneas como archivo Docker por defecto para usar por [webots.cloud](https://webots.cloud).
 
 ```dockerfile
 FROM cyberbotics/webots.cloud:R2022b
@@ -16,19 +16,19 @@ RUN mkdir -p $PROJECT_PATH
 COPY . $PROJECT_PATH
 ```
 
-The following additional line allows to compile the plugin when [webots.cloud](https://webots.cloud) creates the Docker image.
+La siguiente línea adicional permite compilar el plugin cuando [webots.cloud](https://webots.cloud) es quien crea la imagen Docker.
 
 ```dockerfile
 RUN cd $PROJECT_PATH/plugins/robot_windows/simple_e-puck && make clean && make
 ```
 
-**Note**: It is also possible to directly provide the built binaries in the corresponding folders and use the default Dockerfile without any "on-the-fly" compilation.
-However, it is currently not possible to compile C/C++ controllers and robot windows directly from the running simulation on [webots.cloud](https://webots.cloud).
+**Nota**: Es posible también proveer directamente los binarios en las carpetas correspondientes y usar el Dockerfile por defecto sin compilación "on-the-fly".
+Sin embargo, actualmente no es posible compilar controladores en C/C++ y la ventana del robot directamente desde la simulación ejecutándose en [webots.cloud](https://webots.cloud).
 
-`webots.yaml` defines the type of the simulation as a `demo`.
-The `publish` parameter allows to publish the simulation to [webots.cloud](https://webots.cloud) and make it visible in the public list of simulations.
-Finally, `dockerCompose:theia` sets the workspace for the online IDE.
-This means that with `webots-project/controllers/` every user who logs into the simulation is allowed to modify all controllers located in the `controllers` folder.
+`webots.yaml` define el tipo de simulación como `demo`.
+El parámetro `publish` permite publicar la simulación en [webots.cloud](https://webots.cloud) y la visibiliza en la lista pública de simulaciones.
+Finalmente, `dockerCompose:theia` establece el espacio de trabajo para el IDE online.
+Esto significa que con `webots-project/controllers/` cada usuario que inicie sesión en la simulación podría modificar los parámetros ubicados en la carpeta `controllers`.
 
-More information is available in the [Webots User Guide](https://cyberbotics.com/doc/guide/webots-cloud?version=master#publish-cloud-based-simulations).
-For more complex projects and other configurations you can head to the examples repository: [webots.cloud Simulation Examples](https://github.com/cyberbotics/webots-cloud-simulation-examples).
+Más información disponible en [Webots User Guide](https://cyberbotics.com/doc/guide/webots-cloud?version=master#publish-cloud-based-simulations).
+Para proyectos más complejos y otras configuraciones puede ir al repositorio de ejemplos: [webots.cloud Simulation Examples](https://github.com/cyberbotics/webots-cloud-simulation-examples).
