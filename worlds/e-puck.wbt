@@ -8,9 +8,9 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/project
 
 WorldInfo {
   info [
-    "The model of the E-puck robot"
+    "El modelo del robot e-puck"
   ]
-  title "E-puck simulation"
+  title "Simulacion de e-puck"
 }
 Viewpoint {
   orientation -0.16091570958437604 0.08710109655477316 0.9831172531228981 2.0789738795604262
